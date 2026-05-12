@@ -1,5 +1,5 @@
 "use client";
-import { POST } from "@/app/api/register/route";
+// import { POST } from "@/app/api/register/route";
 import Link from "next/link";
 import { useState } from "react";
 
@@ -19,7 +19,7 @@ export default function Registerform(){
     
 
      try {
-        const res= await fetch("api/register",{
+        const res= await fetch("/api/register",{
             method:"POST",
             headers:{
                 "Content-type":"application/json"
