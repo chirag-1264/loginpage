@@ -16,9 +16,25 @@ export default function Registerform(){
         Seterror("All fields are neccessary!");
         return 
       }
-    
-
+     
      try {
+
+     const resuser= await fetch("api/userExist",{
+            method:"POST",
+            headers:{
+                "Content-type":"application/json"
+            },
+            body:JSON.stringify({email})
+        });
+
+         const {gmail} =  await resuser.json();
+         console.log(gmail);
+
+         if(gmail){
+        Seterror("user already exist");
+        return;
+      }
+
         const res= await fetch("/api/register",{
             method:"POST",
             headers:{
