@@ -2,12 +2,15 @@
 // import { POST } from "@/app/api/register/route";
 import Link from "next/link";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 export default function Registerform(){
     const[name,Setname]=useState("");
     const[email,Setemail]=useState("");
     const[password,Setpassword]=useState("");
     const[error,Seterror]=useState("");
+    const router=useRouter();
+
     console.log(name);
     const handle= async(e)=>{
       e.preventDefault();
@@ -47,6 +50,7 @@ export default function Registerform(){
         if(res.ok){
            const form= e.target;
             form.reset();
+    router.push("/");
         }
         else{
             console.log("user registrartion failed")
