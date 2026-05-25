@@ -11,7 +11,6 @@ export default function Registerform(){
     const[error,Seterror]=useState("");
     const router=useRouter();
 
-    console.log(name);
     const handle= async(e)=>{
       e.preventDefault();
 
@@ -31,26 +30,35 @@ export default function Registerform(){
         });
 
          const {gmail} =  await resuser.json();
-         console.log(gmail);
 
          if(gmail){
         Seterror("user already exist");
         return;
       }
 
-        const res= await fetch("/api/register",{
+       const res= await fetch("/api/send-otp",{
             method:"POST",
             headers:{
                 "Content-type":"application/json"
             },
             body:JSON.stringify({
-                name,email,password
+              email
             })
         });
         if(res.ok){
            const form= e.target;
-            form.reset();
-    router.push("/");
+            form.reset(); 
+
+            localStorage.setItem(
+  "signupData",
+  JSON.stringify({
+    name,
+    email,
+    password,
+  })
+);
+
+      router.push("otp");
         }
         else{
             console.log("user registrartion failed")
@@ -69,7 +77,7 @@ export default function Registerform(){
          <input onChange={(e)=> Setname(e.target.value)} type="text" placeholder="Full name"/>
         <input  onChange={(e) => Setemail(e.target.value)}type="text" placeholder="email"/>
         <input   onChange={(e) => Setpassword(e.target.value)} type="text" placeholder="password"/>
-        <button className="bg-green-600 text-white font-bold cursor-pointer px-6 py-2">Register</button>
+        <button className="bg-green-600 text-white font-bold cursor-pointer px-6 py-2">SEND OTP</button>
 {error&&(
         <div className="bg-red-600 text-white w-fit text-sm py-1 px-3 rounded-md mt-2">{error}</div>
 )}
