@@ -2,6 +2,7 @@
 // import { POST } from "@/app/api/register/route";
 import Link from "next/link";
 import { useState } from "react";
+import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 
 export default function Registerform(){
@@ -83,6 +84,15 @@ export default function Registerform(){
 )}
         <Link href={'/'} className="text-sm mt-3 text-right"> Already have a account? <span className="underline">Login</span> </Link>
        </form>
+       <button
+  onClick={() =>
+    signIn("google", {
+      callbackUrl: "/dashboard",
+    })
+  }
+>
+  Continue with Google
+</button>
     </div>
     </div>
     )

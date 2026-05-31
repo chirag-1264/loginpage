@@ -21,8 +21,9 @@ export default function Loginform(){
          const res=await signIn("credentials",{
           email,password,redirect:false
         });
+        console.log(res);
         if(res.error){
-           Seterror("invalid credentials");
+           Seterror(res.error);
            return
         }
       router.replace("dashboard");
@@ -50,7 +51,15 @@ export default function Loginform(){
 
         <Link href={'/register'} className="text-sm mt-3 text-right"> Dont have a account? <span className="underline">Register</span> </Link>
        </form>
-
+         <button
+  onClick={() =>
+    signIn("google", {
+      callbackUrl: "/dashboard",
+    })
+  }
+>
+  Continue with Google
+</button>
     </div>
     </div>
     );

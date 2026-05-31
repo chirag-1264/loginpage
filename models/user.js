@@ -12,7 +12,13 @@ email:{
 },
 password:{
     type:String,
-    required:true,
+     required: function () {
+    return this.provider === "credentials";
+  },
+},
+provider: {
+  type: String,
+  default: "credentials",
 },
 
 },{timestamps:true});
